@@ -65,8 +65,14 @@ h1 {
   font-family: sans-serif;
   justify-content: space-between;
   width: 80%;
-  height: 80px;
+  /* height: 80px; */
   padding-left: 100px;
-  padding-right: 100px;
+  padding-right: 73px;
+
   border: 2px black solid;
+}
+
+
+.timeout_message_show {
+  display: none;
 }
