@@ -5,6 +5,7 @@ $(document).ready(() => {
 
   const $trumps = $('.trump');
   console.log($trumps);
+  const audio = document.querySelector('audio');
 
 
   $trumps.on('click', click);
@@ -12,6 +13,9 @@ $(document).ready(() => {
 
   function click (e) {
     $(e.target).hide(400);
+    audio.src = `./sounds/${e.target.id}.mp3`;
+
+    audio.play();
   }
 
   // ////   TIMER   //////
@@ -23,9 +27,14 @@ $(document).ready(() => {
   let timerRunning = false;
 
 
+
   $start.on('click', function() {
 
+
+
     const countdown = setInterval(() => {
+
+
       countDownValue --;
       $timer.html(countDownValue);
       timerRunning = true;
