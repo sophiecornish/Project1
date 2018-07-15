@@ -14,6 +14,7 @@ $(document).ready(() => {
   function click (e) {
     $(e.target).hide(400);
     audio.src = `./sounds/${e.target.id}.mp3`;
+    
 
     audio.play();
   }
