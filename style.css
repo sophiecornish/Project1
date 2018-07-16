@@ -37,33 +37,19 @@ h1 {
   width: 100px;
   left: 0%;
   top: 0%;
-  animation: bounce 20s infinite;
+  animation: rot 2s infinite;
   border-radius: 100%;
   animation-direction: reverse;
   animation-timing-function: ease;
 }
 
+
+
 #ah_ah_ah {
   width: 150px;
 }
 
-@keyframes bounce {
-  0% {
-    top: 0%;
-  }
-  25% {
-    top: -10%;
-  }
-  50% {
-    top: 0%;
-  }
-  75% {
-    top: 20%;
-  }
-  100% {
-    top: 0%;
-  }
-}
+
 
 
 .nav {
@@ -82,4 +68,57 @@ h1 {
 
 .timeout_message_show {
   display: none;
+}
+
+
+/* /////   ANIMATIONS @keyframes  /////*/
+
+
+@keyframes bounce {
+  0% {
+    top: 0%;
+  }
+  25% {
+    top: -10%;
+  }
+  50% {
+    top: 0%;
+  }
+  75% {
+    top: 30%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+
+@keyframes circle {
+  0% {
+    left: 0%;
+  }
+  25% {
+    right: -30%;
+  }
+  50% {
+    left: -8%;
+  }
+  75% {
+    top: 30%;
+  }
+  100% {
+    bottom: 80%;
+  }
+}
+
+@keyframes rot {
+	from {
+		transform: rotate(0deg)
+		           translate(-72px)
+		           rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg)
+		           translate(-72px)
+		           rotate(-360deg);
+	}
 }

@@ -1,6 +1,9 @@
 $(document).ready(() => {
 
 
+  function 
+
+
   ////   TRUMPS CLICK FUNCTION   ////
 
   const $trumps = $('.trump');
@@ -14,7 +17,7 @@ $(document).ready(() => {
   function click (e) {
     $(e.target).hide(400);
     audio.src = `./sounds/${e.target.id}.mp3`;
-    
+
 
     audio.play();
   }
@@ -26,24 +29,32 @@ $(document).ready(() => {
   let countDownValue = $timer.html();
   const $start = $('#start');
   let timerRunning = false;
+  var clickDisabled = false;
 
 
 
-  $start.on('click', function() {
+  $trumps.on('click', function() {
+
+    if (clickDisabled) {
+      return;
+
+    }  else {
+
+      const countdown = setInterval(() => {
+
+        clickDisabled = true;
+        countDownValue --;
+        $timer.html(countDownValue);
+        timerRunning = true;
+        if (countDownValue ===0) {
+          clearInterval(countdown);
 
 
 
-    const countdown = setInterval(() => {
-
-
-      countDownValue --;
-      $timer.html(countDownValue);
-      timerRunning = true;
-      if (countDownValue ===0) {
-        clearInterval(countdown);
-        timerRunning = false;
-      }
-    }, 1000);
+          timerRunning = false;
+        }
+      }, 1000);
+    }
 
 
 
