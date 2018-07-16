@@ -37,7 +37,9 @@ h1 {
   width: 100px;
   left: 0%;
   top: 0%;
-  animation: rot 2s infinite;
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
   border-radius: 100%;
   animation-direction: reverse;
   animation-timing-function: ease;
@@ -45,7 +47,7 @@ h1 {
 
 
 
-#ah_ah_ah {
+#trumpOne {
   width: 150px;
 }
 
@@ -57,7 +59,7 @@ h1 {
   display: flex;
   font-family: sans-serif;
   justify-content: space-between;
-  width: 80%;
+  width: 83%;
   /* height: 80px; */
   padding-left: 100px;
   padding-right: 73px;
@@ -110,11 +112,11 @@ h1 {
   }
 }
 
-@keyframes rot {
+@keyframes rotate {
 	from {
 		transform: rotate(0deg)
-		           translate(-72px)
-		           rotate(0deg);
+	             translate(-72px)
+	             rotate(0deg);
 	}
 	to {
 		transform: rotate(360deg)

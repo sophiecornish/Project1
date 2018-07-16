@@ -1,7 +1,27 @@
 $(document).ready(() => {
 
 
-  function 
+  ///////// generate random animation ///////////////
+
+  const animations = ['circle', 'rotate', 'bounce'];
+  const animation = animations[Math.floor(Math.random()*animations.length)];
+  console.log(animation);
+
+  const trumps = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
+
+  const trump = trumps[Math.floor(Math.random()*trumps.length)];
+  console.log(trump);
+
+  function animate() {
+    console.log($('.trump').style);
+    $('.trump').css({animationName: animation});
+  }
+
+  animate();
+
+
+
+
 
 
   ////   TRUMPS CLICK FUNCTION   ////
