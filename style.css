@@ -31,7 +31,7 @@ h1 {
 }
 
 .trump {
-  /* border: solid 2px black; */
+  border: solid 2px black;
   position: relative;
   height: 100px;
   width: 100px;
@@ -46,10 +46,10 @@ h1 {
 }
 
 
-
+/*
 #trumpOne {
   width: 150px;
-}
+} */
 
 
 
