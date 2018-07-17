@@ -1,9 +1,9 @@
 body {
- margin-right: 100px;
- margin-left: 100px;
- margin-top: 100px;
- margin-bottom: 0;
- background-image: url("./images/usa-flag.png");
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-top: 100px;
+  margin-bottom: 0;
+  background-image: url("./images/usa-flag.png");
 
 }
 
@@ -122,41 +122,41 @@ h1 {
 }
 
 @keyframes rotate {
-	from {
-		transform: rotate(0deg)
-	             translate(-72px)
-	             rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg)
-		           translate(-72px)
-		           rotate(-360deg);
-	}
+  from {
+    transform: rotate(0deg)
+    translate(-72px)
+    rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg)
+    translate(-72px)
+    rotate(-360deg);
+  }
 }
 
 
 /* ------------------ popUps ------------------ */
 
 .popUp {
-    display: none; /* Hidden by default*/
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+  display: none; /* Hidden by default*/
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
-  .popUp-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.popUp-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
