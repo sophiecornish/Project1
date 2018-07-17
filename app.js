@@ -3,8 +3,10 @@ $(document).ready(() => {
 // -------------------generate trumps function ---------------------------//
 
   const trumps = $('.trumps');
+  //
+  // const levels = [{ name: 1, trumps: 8 }, {name: 2, trumps: 12 }]
 
-  const images = [ './images/trumpOne.png', './images/trumpTwo.png', './images/trumpThree.png', './images/trumpFour.png', './images/trumpFive.png'   ];
+  const images = [ './images/trumpOne.png', './images/trumpTwo.png', './images/trumpThree.png', './images/trumpFour.png', './images/trumpFive.png'];
 
   const speeds = ['10', '12', '15'];
 
@@ -33,13 +35,39 @@ $(document).ready(() => {
 
 
   }
-  addTrumps(8);
+  addTrumps(5);
+
+  //--------------- levels --------------------//
+
+  const levelsDisabled = false;
+
+  $('#level1').on('click', () => {
+    if (levelsDisabled) {
+      return;
+    } else {
+    addTrumps(5);
+    levelsDisabled = true;
+  }
+  if (levelsDisabled) {
+    return;
+  } else {
+  $('#level2').on('click', () => {
+    addTrumps(10);
+    levelsDisabled = true;
+  });
+  if (levelsDisabled) {
+    return;
+  } else {
+  $('#level3').on('click', () => {
+    addTrumps(15);
+  });
+
+
+
+  //-------------- run audio & disappear on click -------//
 
   const audio = document.querySelector('audio');
   const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
-
-
-
 
   trumps.on('click', '.trump', function(){
     const randomNoise = noises[Math.floor(Math.random()*noises.length)];
@@ -49,89 +77,61 @@ $(document).ready(() => {
     audio.play();
   });
 
-});
 
 
 
-//------------------- TRUMPS CLICK FUNCTION ----------------------//
-
-// const $trumps = $('.trumps');
 
 
 
-// $trumps.on('click', click());
 
 
-
-// function click(e) {
-//   $(e.target).hide(400);
-//   audio.src = `./sounds/${randomNoise}.mp3`;
-//   console.log('hi');
-
-
-
-// }
 
 //-------------------TIMER ----------------------//
 
 
-const $timer = $('.timer');
-let countDownValue = $timer.html();
-const $start = $('#start');
-let timerRunning = false;
-var clickDisabled = false;
+  const $timer = $('.timer');
+  let countDownValue = $timer.html();
+  let clickDisabled = false;
+  let countdown;
 
 
 
-$trumps.on('click', function() {
+  trumps.on('click', '.trump', function() {
 
-  if (clickDisabled) {
-    return;
+    if (clickDisabled) {
+      return;
 
-  }  else {
+    }  else {
 
-    const countdown = setInterval(() => {
+      countdown = setInterval(() => {
 
-      clickDisabled = true;
-      countDownValue --;
-      $timer.html(countDownValue);
-      timerRunning = true;
-      if (countDownValue ===0) {
-        clearInterval(countdown);
-        timerRunning = false;
-      }
-    }, 1000);
-  }
+        clickDisabled = true;
+        countDownValue --;
+        $timer.html(countDownValue);
+        if (countDownValue ===0) {
+          clearInterval(countdown);
+        }
+      }, 1000);
+    }
 
 
+    const $reset = $('#reset');
 
+    $reset.on('click', function() {
+      clearInterval(countdown);
+      countDownValue = 10;
+      $timer.html(10);
+      clickDisabled = false;
 
-  //------------------------ RESET --------------------------//
-
-  const $reset = $('#reset');
-
-  $reset.on('click', function() {
-    clearInterval(countdown);
-    countDownValue = 10;
-    $timer.html(10);
-    timerRunning = false;
+    });
 
   });
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
+
+
+
+// bug with TrumpFive //
