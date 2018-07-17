@@ -1,16 +1,26 @@
 $(document).ready(() => {
 
-// -------------------generate trumps function ---------------------------//
-
+  // ---------------Get DOM elements-----------------------------------//
   const trumps = $('.trumps');
-  //
-  // const levels = [{ name: 1, trumps: 8 }, {name: 2, trumps: 12 }]
+  const $scoreboardFill = $('.scoreboardFill');
+  const $timer = $('.timer');
+  const $youLose = $('#youLose');
+  const $tryAgain = $('#tryAgain');
+  const $congrats = $('#congrats');
 
+  // ---------------Initialise level ----------------------------------//
+  let level = 1;
+  let numberOfTrumps = 5;
+  let trumpsRemaining;
+
+  //----------------Trump variables/styles ---------------------------//
   const images = [ './images/trumpOne.png', './images/trumpTwo.png', './images/trumpThree.png', './images/trumpFour.png', './images/trumpFive.png'];
 
   const speeds = ['10', '12', '15'];
 
   const animations = ['circle', 'rotate', 'bounce'];
+
+
 
   function addTrumps(numberOfTrumps) {
     for(let i = 0; i < numberOfTrumps; i++) {
@@ -32,64 +42,73 @@ $(document).ready(() => {
       newTrump.style.animationDuration = randomSpeed;
       trumps.append(newTrump);
     }
-
-
+    $('.trump').on('click', trumpClickHandler);
   }
-  addTrumps(5);
 
   //--------------- levels --------------------//
 
-  const levelsDisabled = false;
+  function levelsAndScore() {
+    $('#start').on('click', () => {
+      trumps.empty();
+      $scoreboardFill.width(0);
+      level = 1;
+      trumpsRemaining = numberOfTrumps;
+      console.log('--->',trumpsRemaining);
+      addTrumps(numberOfTrumps);
+    });
 
-  $('#level1').on('click', () => {
-    if (levelsDisabled) {
-      return;
-    } else {
-    addTrumps(5);
-    levelsDisabled = true;
+
+    // $('#level2').on('click', () => {
+    //   trumps.empty();
+    //   $scoreboardFill.width(0);
+    //   level = 2;
+    //   numberOfTrumps = 8;
+    //   trumpsRemaining = numberOfTrumps;
+    //   addTrumps(numberOfTrumps);
+    //
+    // });
+    // $('#level3').on('click', () => {
+    //   trumps.empty();
+    //   $scoreboardFill.width(0);
+    //   level = 3;
+    //   numberOfTrumps = 12;
+    //   trumpsRemaining = numberOfTrumps;
+    //   addTrumps(numberOfTrumps);
+    // });
+
+
+    //-----------------scoreboard -----------------//
+
   }
-  if (levelsDisabled) {
-    return;
-  } else {
-  $('#level2').on('click', () => {
-    addTrumps(10);
-    levelsDisabled = true;
-  });
-  if (levelsDisabled) {
-    return;
-  } else {
-  $('#level3').on('click', () => {
-    addTrumps(15);
-  });
+
+  levelsAndScore();
 
 
-
-  //-------------- run audio & disappear on click -------//
-
-  const audio = document.querySelector('audio');
-  const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
-
-  trumps.on('click', '.trump', function(){
+  function trumpClickHandler() {
+    $(this).off('click');
+    const audio = document.querySelector('audio');
+    const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
     const randomNoise = noises[Math.floor(Math.random()*noises.length)];
-    console.log(randomNoise);
+    console.log('randomNoise', randomNoise);
     $(event.target).hide(400);
     audio.src = `./sounds/${randomNoise}.mp3`;
     audio.play();
-  });
+    trumpsRemaining --;
+    console.log(trumpsRemaining);
+    $('.scoreboardFill').width(function(n, currentWidth) {
+      return currentWidth + ($('.scoreboard').width() / numberOfTrumps);
+    });
+  }
+
+  //-------------- run audio & disappear on click -------//
 
 
+  $('.trump').on('click', trumpClickHandler);
 
 
+  //-------------------TIMER ----------------------//
 
 
-
-
-
-
-//-------------------TIMER ----------------------//
-
-
-  const $timer = $('.timer');
   let countDownValue = $timer.html();
   let clickDisabled = false;
   let countdown;
@@ -110,10 +129,10 @@ $(document).ready(() => {
         $timer.html(countDownValue);
         if (countDownValue ===0) {
           clearInterval(countdown);
+          $youLose.show();
         }
       }, 1000);
     }
-
 
     const $reset = $('#reset');
 
@@ -128,10 +147,32 @@ $(document).ready(() => {
   });
 
 
+  //------------- Try Again ------------------//
 
+  $tryAgain.on('click', function() {
+    location.reload();
+
+  });
+
+  //------------------ Trumps Remaining/Level Up ------//
+  // 
+  // function levelUp(){
+  //   if (trumpsRemaining ===0) {
+  //     $congrats.show();
+  //   }
+  //
+  // }
+  // levelUp();
+
+
+
+
+  //----- Start Game ----------------------------------
+  addTrumps(5);
 
 });
 
 
 
-// bug with TrumpFive //
+
+// });

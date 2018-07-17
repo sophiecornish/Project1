@@ -1,41 +1,72 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-      <link rel="stylesheet" href="./style.css"></link>
-      <title>DUMP TRUMP</title>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-      <script src="app.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./style.css"></link>
+  <title>DUMP TRUMP</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
   <div class="wrapper">
     <h1>
-    <img src="./images/dump-trump.png"></h1>
+      <img src="./images/dump-trump.png"></h1>
 
-    <audio src=""></audio>
-
-
-  <div class="trumps">
-
-  </div>
+      <audio src=""></audio>
 
 
+      <div class="trumps">
 
-
-
-
-
-    <div class="nav">
-      <div class="buttons">
-      <button id="level1" name="Level One">Level One</button>
-      <button id="level2" name="Level Two">Level Two</button>
-      <button id="level3" name="Level Three">Level Three</button>
       </div>
-      <div class="timer-container">
-        <button id="reset">reset</button>
-      <div class="timer">10</div>
+
+
+
+      <div class="nav">
+        <div class="buttons">
+          <button id="start" name="start">Start</button>
+          <!-- <button id="level2" name="Level Two">Level Two</button>
+          <button id="level3" name="Level Three">Level Three</button>
+        </div> -->
+        <div class="scoreboard">
+          <div class="scoreboardFill">
+          </div>
+        </div>
+        <div class="timer-container">
+          <button id="reset">reset</button>
+          <div class="timer">10</div>
+        </div>
+      </div>
+
+
+
+      <!-- popUps -->
+
+      <div id="youLose" class="popUp">
+
+        <!-- popUp Content -->
+        <div class="popUp-content">
+          <span class="close">&times;</span>
+          <p>You Lose!</p>
+          <button id="tryAgain">Try again!</button>
+        </div>
+
+      </div>
+
+      <div id="Congrats" class="popUp">
+        <div class="popUp-content">
+          <span class="close">&times;</span>
+          <p>Congratulations - levelUp!</p>
+          <button id="tryAgain">Try again!</button>
+          <button id="nextLevel">Next level!</button>
+        </div>
+
+
+      </div>
+
     </div>
-    </div>
+
   </div>
-  </body>
+</div>
+
+</body>
 </html>

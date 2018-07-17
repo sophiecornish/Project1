@@ -23,8 +23,9 @@ h1 {
 .trumps {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   font-family: sans-serif;
-  height: 50vh;
+  height: 40vh;
   justify-content: space-around;
   width: 100%;
   margin-bottom: 0;
@@ -46,10 +47,6 @@ h1 {
 }
 
 
-/*
-#trumpOne {
-  width: 150px;
-} */
 
 
 
@@ -65,6 +62,18 @@ h1 {
   padding-right: 73px;
   background: white;
   border: 2px black solid;
+}
+
+.scoreboard {
+  border: 2px solid black;
+  height: 20px;
+  width: 200px;
+}
+
+.scoreboardFill{
+  height: 20px;
+  width: 0px;
+  background-color: red;
 }
 
 
@@ -124,3 +133,30 @@ h1 {
 		           rotate(-360deg);
 	}
 }
+
+
+/* ------------------ popUps ------------------ */
+
+.popUp {
+    display: none; /* Hidden by default*/
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  .popUp-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
