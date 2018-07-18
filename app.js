@@ -12,6 +12,32 @@ $(document).ready(() => {
   const $wrapper = $('.wrapper');
 
 
+
+
+
+  //----------------Trump variables/styles ---------------------------//
+  const images = [ './images/trumpOne.png', './images/trumpTwo.png', './images/trumpThree.png', './images/trumpFour.png', './images/trumpFive.png'];
+
+  const speeds = ['10', '12', '15'];
+
+  const animations = ['circle', 'rotate', 'bounce'];
+
+  const backingAudio = document.querySelector('#backing');
+
+  //----------SHOW START MESSAGE------------//
+
+
+
+  function runToStart() {
+
+    $letsBegin.show();
+
+  }
+  runToStart();
+
+
+
+
   // ---------------Initialise level ----------------------------------//
   let currentLevel = -1;
   let initialTimer = 10;
@@ -24,23 +50,7 @@ $(document).ready(() => {
 
   let trumpsRemaining;
 
-  //----------------Trump variables/styles ---------------------------//
-  const images = [ './images/trumpOne.png', './images/trumpTwo.png', './images/trumpThree.png', './images/trumpFour.png', './images/trumpFive.png'];
-
-  const speeds = ['10', '12', '15'];
-
-  const animations = ['circle', 'rotate', 'bounce'];
-
-  //----------SHOW START MESSAGE------------//
-
-  function runToStart() {
-
-    $letsBegin.show();
-
-  }
-  runToStart();
-
-//------------ ADDING NEW TRUMPS --------------------//
+  //------------ ADDING NEW TRUMPS --------------------//
 
   function addTrumps(numberOfTrumps) {
     for(let i = 0; i < numberOfTrumps; i++) {
@@ -71,6 +81,9 @@ $(document).ready(() => {
 
 
   function startGame() {
+
+    backingAudio.play();
+
     currentLevel ++;
     trumps.empty();
     $scoreboardFill.width(0);
@@ -119,7 +132,7 @@ $(document).ready(() => {
 
   function trumpClickHandler() {
     $(this).off('click');
-    const audio = document.querySelector('audio');
+    const audio = document.querySelector('#trump');
     const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
     const randomNoise = noises[Math.floor(Math.random() * noises.length)];
     console.log('randomNoise', randomNoise);

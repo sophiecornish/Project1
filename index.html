@@ -8,11 +8,18 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="app.js"></script>
 </head>
+
+
 <body>
+  <audio
+  id="backing"
+  src="./sounds/backing-music.mp3"
+  ></audio>
+  <audio id="trump" src=""></audio>
+
   <div class="wrapper">
     <h1>
       <img src="./images/dump-trump.png"></h1>
-      <audio src=""></audio>
       <div class="trumps">
       </div>
       <div class="nav">
@@ -29,7 +36,7 @@
     <!-- popUps -->
 
     <div id="letsBegin" class="startpopUp">
-      <div class="popUp-content">
+      <div class="startpopUp-content">
         <h1><img src="./images/dump-trump.png"></h1>
         <h2>It's time to make America great again </h2>
         <p>*** Dump Trump to make him disappear ***</p>
@@ -38,18 +45,15 @@
       </div>
     </div>
     <div id="youLose" class="popUp">
-
-      <!-- popUp Content -->
       <div class="popUp-content">
-        <span class="close">&times;</span>
         <p>You Lose!</p>
-        <button id="tryAgain"> </button>
+        <button id="tryAgain">TRY AGAIN </button>
       </div>
     </div>
     <div id="congrats" class="popUp">
       <div class="popUp-content">
-        <H1>CONGRATULATIONS</p>
-        <p>***LEVEL UP***</p>
+        <p>YUUUUUUUGE</p>
+        <p>*** LEVEL UP ***</p>
       </div>
     </div>
   </div>
