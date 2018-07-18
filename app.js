@@ -8,6 +8,7 @@ $(document).ready(() => {
   const $tryAgain = $('#tryAgain');
   const $congrats = $('#congrats');
   const $start = $('#start');
+  const $letsBegin = $('#letsBegin');
 
 
   // ---------------Initialise level ----------------------------------//
@@ -28,6 +29,15 @@ $(document).ready(() => {
   const speeds = ['10', '12', '15'];
 
   const animations = ['circle', 'rotate', 'bounce'];
+
+  //----------SHOW START MESSAGE------------//
+
+  function runToStart() {
+
+    $letsBegin.show();
+
+  }
+  runToStart();
 
 //------------ ADDING NEW TRUMPS --------------------//
 
@@ -69,6 +79,8 @@ $(document).ready(() => {
     countDownValue = initialTimer;
     $timer.html(countDownValue);
     setTimeout(startTimer, 3000);
+    $letsBegin.hide(1000);
+
   }
 
   //----------------- start Timer / Reset ----------------------//
@@ -132,6 +144,8 @@ $(document).ready(() => {
   trumps.on('click', '.trump', function() {
     if(trumpsRemaining === 0){
       clearInterval(countdown);
+      $congrats.show(1000);
+      $congrats.hide(1000);
       startGame();
     }
   });
