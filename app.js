@@ -9,8 +9,10 @@ $(document).ready(() => {
   const $congrats = $('#congrats');
   const $start = $('#start');
 
+
   // ---------------Initialise level ----------------------------------//
-  let currentLevel = 0;
+  let currentLevel = -1;
+  let initialTimer = 10;
   const levels = [
     { name: 1, numberOfTrumps: 5 },
     { name: 2, numberOfTrumps: 8 },
@@ -27,7 +29,7 @@ $(document).ready(() => {
 
   const animations = ['circle', 'rotate', 'bounce'];
 
-
+//------------ ADDING NEW TRUMPS --------------------//
 
   function addTrumps(numberOfTrumps) {
     for(let i = 0; i < numberOfTrumps; i++) {
@@ -52,60 +54,50 @@ $(document).ready(() => {
     $('.trump').on('click', trumpClickHandler);
   }
 
-  //--------------- levels --------------------//
+  //--------------- start Game--------------------//
 
   $start.on('click', startGame);
 
 
   function startGame() {
+    currentLevel ++;
     trumps.empty();
     $scoreboardFill.width(0);
     trumpsRemaining = levels[currentLevel].numberOfTrumps;
     console.log('--->',trumpsRemaining);
     addTrumps(levels[currentLevel].numberOfTrumps);
-    currentLevel ++;
-    countDownValue = 10;
+    countDownValue = initialTimer;
+    $timer.html(countDownValue);
     setTimeout(startTimer, 3000);
   }
 
+  //----------------- start Timer / Reset ----------------------//
 
-function startTimer() {
-    if (clickDisabled) {
-      return;
 
-    }  else {
+  let countDownValue = $timer.html();
+  let countdown;
+  const $reset = $('#reset');
 
-      countdown = setInterval(() => {
-
-        clickDisabled = true;
-        countDownValue --;
-        $timer.html(countDownValue);
-
-        if (countDownValue ===0) {
-          clearInterval(countdown);
-          $youLose.show();
-        }
-      }, 1000);
-    }
+  function startTimer() {
+    countdown = setInterval(() => {
+      countDownValue --;
+      $timer.html(countDownValue);
+      if (countDownValue === 0) {
+        console.log('clearing interval', countdown);
+        clearInterval(countdown);
+        $youLose.show();
+      }
+    }, 1000);
   }
 
-
-const $reset = $('#reset');
-
-function resetTimer() {
-
-
+  function resetTimer() {
     $reset.on('click', function() {
       clearInterval(countdown);
       countDownValue = 10;
       $timer.html(10);
-      clickDisabled = false;
-
     });
   }
-//-----------------scoreboard -----------------//
-
-
+//-----------------on click events (noises / hide / scoreboard) -----------------//
 
 
 
@@ -114,7 +106,7 @@ function resetTimer() {
     $(this).off('click');
     const audio = document.querySelector('audio');
     const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
-    const randomNoise = noises[Math.floor(Math.random()*noises.length)];
+    const randomNoise = noises[Math.floor(Math.random() * noises.length)];
     console.log('randomNoise', randomNoise);
     $(event.target).hide(400);
     audio.src = `./sounds/${randomNoise}.mp3`;
@@ -132,72 +124,16 @@ function resetTimer() {
   $('.trump').on('click', trumpClickHandler);
 
 
-  //-------------------TIMER ----------------------//
-
-
-  let countDownValue = $timer.html();
-  let clickDisabled = false;
-  let countdown;
-
-  // function startTimer() {
-  //   if (clickDisabled) {
-  //     return;
-  //
-  //   }  else {
-  //
-  //     countdown = setInterval(() => {
-  //
-  //       clickDisabled = true;
-  //       countDownValue --;
-  //       $timer.html(countDownValue);
-  //
-  //       if (countDownValue ===0) {
-  //         clearInterval(countdown);
-  //         $youLose.show();
-  //       }
-  //     }, 1000);
-  //   }
-  // }
 
 
 
-
-
+//------------ RESET ------------------ //
 
   trumps.on('click', '.trump', function() {
     if(trumpsRemaining === 0){
       clearInterval(countdown);
       startGame();
     }
-
-    if (clickDisabled) {
-      return;
-
-    }  else {
-
-      countdown = setInterval(() => {
-
-        clickDisabled = true;
-        countDownValue --;
-        $timer.html(countDownValue);
-
-        if (countDownValue ===0) {
-          clearInterval(countdown);
-          $youLose.show();
-        }
-      }, 1000);
-    }
-
-    // const $reset = $('#reset');
-    //
-    // $reset.on('click', function() {
-    //   clearInterval(countdown);
-    //   countDownValue = 10;
-    //   $timer.html(10);
-    //   clickDisabled = false;
-    //
-    // });
-
   });
 
 
@@ -205,23 +141,6 @@ function resetTimer() {
 
   $tryAgain.on('click', function() {
     location.reload();
-
   });
 
-  //------------------ Trumps Remaining/Level Up ------//
-  //
-  // function levelUp(){
-  //   if (trumpsRemaining ===0) {
-  //     $congrats.show();
-  //   }
-  //
-  // }
-  // levelUp();
-
-
 });
-
-
-
-
-// });
