@@ -112,7 +112,7 @@ $(document).ready(() => {
       $timer.html(10);
     });
   }
-//-----------------on click events (noises / hide / scoreboard) -----------------//
+  //-----------------on click events (noises / hide / scoreboard) -----------------//
 
 
 
@@ -142,13 +142,14 @@ $(document).ready(() => {
 
 
 
-//------------ RESET ------------------ //
+  //------------ RESET ------------------ //
 
   trumps.on('click', '.trump', function() {
     if(trumpsRemaining === 0){
       clearInterval(countdown);
-      $congrats.show(1000);
-      $congrats.hide(1000);
+      $congrats.show(10);
+      $congrats.delay(1000);
+      $congrats.hide(10);
       startGame();
     }
   });

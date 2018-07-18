@@ -1,10 +1,12 @@
+/*--------- BODY ----------*/
+
+
 body {
   margin-right: 100px;
   margin-left: 100px;
   margin-top: 100px;
   margin-bottom: 0;
   background-image: url("./images/usa-flag.png");
-
 }
 
 .wrapper {
@@ -15,9 +17,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: none;
-
 }
-
 
 h1 {
   text-align: center;
@@ -56,9 +56,7 @@ h1 {
 }
 
 
-
-
-
+/*------------ NAV -----------*/
 
 .nav {
   align-items: center;
@@ -72,6 +70,8 @@ h1 {
   right:0;
   height: 50px;
 }
+
+/* -------- SCOREBOARDS ------------- */
 
 .scoreboard {
   height: 50px;
@@ -99,7 +99,84 @@ border-width: 2px 2px 0 0;
 }
 
 
-/* /////   ANIMATIONS @keyframes  /////*/
+/* ------------------ popUps ------------------ */
+
+.popUp {
+  display: none; /* Hidden by default
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+}
+
+.popUp-content {
+  background-color: white;
+  border-style: dotted;
+  border-width: 10px;
+  border-color: red;
+  padding: 20px;
+  width: 40%;
+  height: 60vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.startpopUp {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  font-family: 'Roboto Mono', monospace;
+  text-align: center;
+}
+
+
+
+button {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bolder;
+  font-size: 15px;
+  border-radius: 10%;
+  height: 50px;
+  width: 100px;
+  margin-top: 10px;
+}
+
+#youLose {
+  display: none;
+}
+
+#congrats {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  text-align: center;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: lighter;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/*--------- ANIMATIONS @keyframes -----------*/
 
 
 @keyframes bounce {
@@ -149,69 +226,4 @@ border-width: 2px 2px 0 0;
     translate(-72px)
     rotate(-360deg);
   }
-}
-
-
-/* ------------------ popUps ------------------ */
-
-.popUp {
-  /* display: none; /* Hidden by default*/ */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  /* background-color: rgb(0,0,0); /* Fallback color */ */
-  /* background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ */
-}
-
-.popUp-content {
-  background-color: white;
-  border-style: dotted;
-  border-width: 10px;
-  border-color: red;
-  padding: 20px;
-  width: 40%;
-  height: 60vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.startpopUp {
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  font-family: 'Roboto Mono', monospace;
-  text-align: center;
-}
-
-
-
-button {
-  font-family: 'Roboto Mono', monospace;
-  font-weight: bolder;
-  font-size: 15px;
-  border-radius: 10%;
-  height: 50px;
-  width: 100px;
-  margin-top: 10px;
-
-}
-
-#youLose {
-  display: none;
-}
-
-#congrats {
-  display: none;
 }
