@@ -8,9 +8,14 @@ body {
 }
 
 .wrapper {
-  height: 600px;
+  height: 650px;
   border: 2px black solid;
   background-color: white;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: none;
+
 }
 
 
@@ -25,10 +30,14 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   font-family: sans-serif;
-  height: 40vh;
+  height: 570px;
+  margin-top: -150px;
   justify-content: space-around;
-  width: 100%;
+  align-content: flex-end;
+  align-items: flex-end;
   margin-bottom: 0;
+  box-sizing: border-box;
+  padding: 50px 70px 150px;
 }
 
 .trump {
@@ -56,22 +65,24 @@ h1 {
   display: flex;
   font-family: sans-serif;
   justify-content: space-between;
-  width: 83%;
-  /* height: 80px; */
-  padding-left: 100px;
-  padding-right: 73px;
   background: white;
-  border: 2px black solid;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right:0;
+  height: 50px;
 }
 
 .scoreboard {
-  border: 2px solid black;
-  height: 20px;
-  width: 200px;
+  height: 50px;
+    width: 80%;
+  border-color: black;
+border-style: solid;
+border-width: 2px 2px 0 0;
 }
 
 .scoreboardFill{
-  height: 20px;
+  height: 50px;
   width: 0px;
   background-color: red;
 }
@@ -79,6 +90,12 @@ h1 {
 
 .timeout_message_show {
   display: none;
+}
+
+.timer {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 50px;
+  margin-right: 20px;
 }
 
 
@@ -138,7 +155,7 @@ h1 {
 /* ------------------ popUps ------------------ */
 
 .popUp {
-  display: none; /* Hidden by default*/
+  /* display: none; /* Hidden by default*/ */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -146,15 +163,18 @@ h1 {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* background-color: rgb(0,0,0); /* Fallback color */ */
+  /* background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ */
 }
 
 .popUp-content {
-  background-color: #fefefe;
+  background-color: white;
+  border-style: dotted;
+  border-width: 10px;
+  border-color: red;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  width: 40%;
+  height: 60vh;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -171,5 +191,27 @@ h1 {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  font-family: 'Roboto Mono', monospace;
+  text-align: center;
+}
 
+
+
+button {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bolder;
+  font-size: 15px;
+  border-radius: 10%;
+  height: 50px;
+  width: 100px;
+  margin-top: 10px;
+
+}
+
+#youLose {
+  display: none;
+}
+
+#congrats {
+  display: none;
 }

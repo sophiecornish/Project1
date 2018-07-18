@@ -9,6 +9,7 @@ $(document).ready(() => {
   const $congrats = $('#congrats');
   const $start = $('#start');
   const $letsBegin = $('#letsBegin');
+  const $wrapper = $('.wrapper');
 
 
   // ---------------Initialise level ----------------------------------//
@@ -77,9 +78,11 @@ $(document).ready(() => {
     console.log('--->',trumpsRemaining);
     addTrumps(levels[currentLevel].numberOfTrumps);
     countDownValue = initialTimer;
-    $timer.html(countDownValue);
-    setTimeout(startTimer, 3000);
+    $timer.html('00:' + countDownValue);
+    setTimeout(startTimer, 2000);
     $letsBegin.hide(1000);
+    $wrapper.show();
+
 
   }
 
@@ -93,7 +96,7 @@ $(document).ready(() => {
   function startTimer() {
     countdown = setInterval(() => {
       countDownValue --;
-      $timer.html(countDownValue);
+      $timer.html('00:' + countDownValue);
       if (countDownValue === 0) {
         console.log('clearing interval', countdown);
         clearInterval(countdown);
