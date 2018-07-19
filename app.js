@@ -10,6 +10,7 @@ $(document).ready(() => {
   const $start = $('#start');
   const $letsBegin = $('#letsBegin');
   const $wrapper = $('.wrapper');
+  let gameOn = false;
 
 
 
@@ -23,6 +24,8 @@ $(document).ready(() => {
   const animations = ['circle', 'rotate', 'bounce'];
 
   const backingAudio = document.querySelector('#backing');
+
+  const hugeAudio = document.querySelector('#huge');
 
   //----------SHOW START MESSAGE------------//
 
@@ -83,15 +86,18 @@ $(document).ready(() => {
   function startGame() {
 
     backingAudio.play();
+    hugeAudio.play();
+
 
     currentLevel ++;
     trumps.empty();
+    gameOn = true;
     $scoreboardFill.width(0);
     trumpsRemaining = levels[currentLevel].numberOfTrumps;
     console.log('--->',trumpsRemaining);
     addTrumps(levels[currentLevel].numberOfTrumps);
     countDownValue = initialTimer;
-    $timer.html('00:' + countDownValue);
+    $timer.html(`00:${countDownValue}`);
     setTimeout(startTimer, 2000);
     $letsBegin.hide(1000);
     $wrapper.show();
@@ -109,11 +115,12 @@ $(document).ready(() => {
   function startTimer() {
     countdown = setInterval(() => {
       countDownValue --;
-      $timer.html('00:' + countDownValue);
+      $timer.html(`00:0${countDownValue}`);
       if (countDownValue === 0) {
         console.log('clearing interval', countdown);
         clearInterval(countdown);
         $youLose.show();
+        gameOn = false;
       }
     }, 1000);
   }
@@ -131,19 +138,21 @@ $(document).ready(() => {
 
 
   function trumpClickHandler() {
-    $(this).off('click');
-    const audio = document.querySelector('#trump');
-    const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
-    const randomNoise = noises[Math.floor(Math.random() * noises.length)];
-    console.log('randomNoise', randomNoise);
-    $(event.target).hide(400);
-    audio.src = `./sounds/${randomNoise}.mp3`;
-    audio.play();
-    trumpsRemaining --;
-    console.log(trumpsRemaining);
-    $('.scoreboardFill').width(function(n, currentWidth) {
-      return currentWidth + ($('.scoreboard').width() / levels[currentLevel].numberOfTrumps);
-    });
+    if(gameOn===true) {
+      $(this).off('click');
+      const audio = document.querySelector('#trump');
+      const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
+      const randomNoise = noises[Math.floor(Math.random() * noises.length)];
+      console.log('randomNoise', randomNoise);
+      $(event.target).hide(400);
+      audio.src = `./sounds/${randomNoise}.mp3`;
+      audio.play();
+      trumpsRemaining --;
+      console.log(trumpsRemaining);
+      $('.scoreboardFill').width(function(n, currentWidth) {
+        return currentWidth + ($('.scoreboard').width() / levels[currentLevel].numberOfTrumps);
+      });
+    }
   }
 
   //-------------- run audio & disappear on click -------//
@@ -163,6 +172,7 @@ $(document).ready(() => {
       $congrats.show(10);
       $congrats.delay(1000);
       $congrats.hide(10);
+      hugeAudio.play();
       startGame();
     }
   });
