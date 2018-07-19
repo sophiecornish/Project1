@@ -12,38 +12,35 @@ $(document).ready(() => {
   const $wrapper = $('.wrapper');
   let gameOn = false;
 
+  function generateRandomAnimation() {
+    return animations[Math.floor(Math.random()*animations.length)];
+  }
 
-
-
+  function generateRandomSpeed() {
+    return speeds[Math.floor(Math.random()*speeds.length)];
+  }
 
   //----------------Trump variables/styles ---------------------------//
   const images = [ './images/trumpOne.png', './images/trumpTwo.png', './images/trumpThree.png', './images/trumpFour.png', './images/trumpFive.png'];
 
   const speeds = ['10', '12', '15'];
 
-  const animations = ['circle', 'rotate', 'bounce'];
+  const animations = ['circle', 'rotate', 'bounce', 'nudge', 'revRotate'];
 
   const backingAudio = document.querySelector('#backing');
 
   const hugeAudio = document.querySelector('#huge');
 
   //----------SHOW START MESSAGE------------//
-
-
-
   function runToStart() {
-
     $letsBegin.show();
-
   }
+
   runToStart();
-
-
-
 
   // ---------------Initialise level ----------------------------------//
   let currentLevel = -1;
-  let initialTimer = 10;
+  const initialTimer = 15;
   const levels = [
     { name: 1, numberOfTrumps: 5 },
     { name: 2, numberOfTrumps: 8 },
@@ -57,13 +54,12 @@ $(document).ready(() => {
 
   function addTrumps(numberOfTrumps) {
     for(let i = 0; i < numberOfTrumps; i++) {
-      const randomImage = images[Math.floor(Math.random()*images.length)];
 
-      const randomAnimation = animations[Math.floor(Math.random()*animations.length)];
+      const randomImage = images[Math.floor(Math.random()*images.length)];
+      const randomAnimation = generateRandomAnimation();
       console.log(randomAnimation);
 
-      const randomSpeed =
-      speeds[Math.floor(Math.random()*speeds.length)];
+      const randomSpeed = generateRandomSpeed();
       console.log(randomSpeed);
 
 
@@ -94,7 +90,6 @@ $(document).ready(() => {
     gameOn = true;
     $scoreboardFill.width(0);
     trumpsRemaining = levels[currentLevel].numberOfTrumps;
-    console.log('--->',trumpsRemaining);
     addTrumps(levels[currentLevel].numberOfTrumps);
     countDownValue = initialTimer;
     $timer.html(`00:${countDownValue}`);
@@ -102,40 +97,81 @@ $(document).ready(() => {
     $letsBegin.hide(1000);
     $wrapper.show();
 
-
+    if (currentLevel === 0) {
+      addObama(1);
+      addPutin(2);
+    } else if(currentLevel === 1) {
+      addObama(3);
+      addPutin(3);
+    } else if(currentLevel === 2) {
+      addObama(3);
+      addPutin(3);
+    } else if(currentLevel === 3) {
+      addObama(4);
+      addPutin(3);
+    }
   }
+
+
+
+  //--------------add OBAMA ---------------------//
+
+  function addObama(numberOfObamas) {
+    for(let i = 0; i < numberOfObamas; i++) {
+
+      const newObama = document.createElement('div');
+      newObama.className = 'obama';
+      newObama.style.backgroundImage = `url("${'./images/obama.png'}")`;
+      newObama.style.animationName = generateRandomAnimation();
+      newObama.style.animationDuration = generateRandomSpeed();
+      newObama.addEventListener('click', obamaClickHandler);
+      trumps.append(newObama);
+    }
+  }
+
+
+  //------------- add Putin ---------------- //
+
+  function addPutin(numberofPutins) {
+    for(let i = 0; i < numberofPutins; i++) {
+      const newPutin = document.createElement('div');
+      newPutin.className = 'putin';
+      newPutin.style.backgroundImage = `url("${'./images/putin.png'}")`;
+      newPutin.style.animationName = generateRandomAnimation();
+      newPutin.style.animationDuration = generateRandomSpeed();
+      newPutin.addEventListener('click', putinClickHandler);
+      trumps.append(newPutin);
+
+    }
+  }
+
+
+
 
   //----------------- start Timer / Reset ----------------------//
 
 
   let countDownValue = $timer.html();
   let countdown;
-  const $reset = $('#reset');
+
 
   function startTimer() {
     countdown = setInterval(() => {
       countDownValue --;
-      $timer.html(`00:0${countDownValue}`);
+      countDownValue < 10 ? $timer.html(`00:0${countDownValue}`) : $timer.html(`00:${countDownValue}`);
       if (countDownValue === 0) {
         console.log('clearing interval', countdown);
         clearInterval(countdown);
         $youLose.show();
+        $('.wall').addClass('rise-from-below');
         gameOn = false;
+
+
       }
     }, 1000);
   }
 
-  function resetTimer() {
-    $reset.on('click', function() {
-      clearInterval(countdown);
-      countDownValue = 10;
-      $timer.html(10);
-    });
-  }
   //-----------------on click events (noises / hide / scoreboard) -----------------//
-
-
-
 
   function trumpClickHandler() {
     if(gameOn===true) {
@@ -161,10 +197,36 @@ $(document).ready(() => {
   $('.trump').on('click', trumpClickHandler);
 
 
+  //---------------- obama click handler -------------//
 
 
+  function obamaClickHandler() {
+    console.log('Clicked Obama!');
+    if(gameOn===true) {
+      $(this).off('click');
+      const obamaAudio = document.querySelector('#obama');
+      $(event.target).hide(400);
+      $('.wall').addClass('rise-from-below');
+      $youLose.show();
 
-  //------------ RESET ------------------ //
+      obamaAudio.play();
+    }
+  }
+
+  //--------------- Putin click handler ----------------//
+
+  function putinClickHandler() {
+    if(gameOn === true) {
+      $(this).off('click');
+      const putinAudio = document.querySelector('#putin');
+      $(event.target).hide(400);
+      addTrumps(3);
+      putinAudio.play();
+    }
+
+  }
+
+  //------------ LEVEL UP ------------------ //
 
   trumps.on('click', '.trump', function() {
     if(trumpsRemaining === 0){
