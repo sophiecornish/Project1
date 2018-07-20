@@ -57,12 +57,8 @@ $(document).ready(() => {
 
       const randomImage = images[Math.floor(Math.random()*images.length)];
       const randomAnimation = generateRandomAnimation();
-      console.log(randomAnimation);
 
       const randomSpeed = generateRandomSpeed();
-      console.log(randomSpeed);
-
-
 
       const newTrump = document.createElement('div');
       newTrump.className = 'trump';
@@ -70,8 +66,10 @@ $(document).ready(() => {
       newTrump.style.animationName = randomAnimation;
       newTrump.style.animationDuration = randomSpeed;
       trumps.append(newTrump);
+      console.log(newTrump);
+      newTrump.addEventListener('click', trumpClickHandler);
     }
-    $('.trump').on('click', trumpClickHandler);
+    // $('.trump').on('click', trumpClickHandler);
   }
 
   //--------------- start Game--------------------//
@@ -90,6 +88,7 @@ $(document).ready(() => {
     gameOn = true;
     $scoreboardFill.width(0);
     trumpsRemaining = levels[currentLevel].numberOfTrumps;
+    console.log('line 91', trumpsRemaining);
     addTrumps(levels[currentLevel].numberOfTrumps);
     countDownValue = initialTimer;
     $timer.html(`00:${countDownValue}`);
@@ -160,7 +159,6 @@ $(document).ready(() => {
       countDownValue --;
       countDownValue < 10 ? $timer.html(`00:0${countDownValue}`) : $timer.html(`00:${countDownValue}`);
       if (countDownValue === 0) {
-        console.log('clearing interval', countdown);
         clearInterval(countdown);
         $youLose.show();
         $('.wall').addClass('rise-from-below');
@@ -179,12 +177,11 @@ $(document).ready(() => {
       const audio = document.querySelector('#trump');
       const noises = ['trumpOne', 'trumpTwo', 'trumpThree', 'trumpFour', 'trumpFive'];
       const randomNoise = noises[Math.floor(Math.random() * noises.length)];
-      console.log('randomNoise', randomNoise);
       $(event.target).hide(400);
       audio.src = `./sounds/${randomNoise}.mp3`;
       audio.play();
       trumpsRemaining --;
-      console.log(trumpsRemaining);
+      console.log('line 184 - CLICK ON TRUMP', trumpsRemaining);
       $('.scoreboardFill').width(function(n, currentWidth) {
         return currentWidth + ($('.scoreboard').width() / levels[currentLevel].numberOfTrumps);
       });
@@ -201,7 +198,6 @@ $(document).ready(() => {
 
 
   function obamaClickHandler() {
-    console.log('Clicked Obama!');
     if(gameOn===true) {
       $(this).off('click');
       const obamaAudio = document.querySelector('#obama');
@@ -221,6 +217,8 @@ $(document).ready(() => {
       const putinAudio = document.querySelector('#putin');
       $(event.target).hide(400);
       addTrumps(3);
+      trumpsRemaining += 3;
+      console.log('line 220', trumpsRemaining);
       putinAudio.play();
     }
 
@@ -229,7 +227,9 @@ $(document).ready(() => {
   //------------ LEVEL UP ------------------ //
 
   trumps.on('click', '.trump', function() {
+    console.log('line 229', trumpsRemaining);
     if(trumpsRemaining === 0){
+      console.log('line 231', trumpsRemaining);
       clearInterval(countdown);
       $congrats.show(10);
       $congrats.delay(1000);
