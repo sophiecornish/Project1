@@ -49,10 +49,14 @@ $(document).ready(() => {
   ];
 
   let trumpsRemaining;
+  let totalTrumps = 0;
 
   //------------ ADDING NEW TRUMPS --------------------//
 
   function addTrumps(numberOfTrumps) {
+    if(totalTrumps) {
+      totalTrumps = 0;
+    }
     for(let i = 0; i < numberOfTrumps; i++) {
 
       const randomImage = images[Math.floor(Math.random()*images.length)];
@@ -66,10 +70,10 @@ $(document).ready(() => {
       newTrump.style.animationName = randomAnimation;
       newTrump.style.animationDuration = randomSpeed;
       trumps.append(newTrump);
-      console.log(newTrump);
       newTrump.addEventListener('click', trumpClickHandler);
+      totalTrumps ++;
+      console.log(totalTrumps);
     }
-    // $('.trump').on('click', trumpClickHandler);
   }
 
   //--------------- start Game--------------------//
@@ -88,7 +92,8 @@ $(document).ready(() => {
     gameOn = true;
     $scoreboardFill.width(0);
     trumpsRemaining = levels[currentLevel].numberOfTrumps;
-    console.log('line 91', trumpsRemaining);
+    // totalTrumps = levels[currentLevel].numberOfTrumps;
+    console.log('--->', trumpsRemaining);
     addTrumps(levels[currentLevel].numberOfTrumps);
     countDownValue = initialTimer;
     $timer.html(`00:${countDownValue}`);
@@ -181,10 +186,9 @@ $(document).ready(() => {
       audio.src = `./sounds/${randomNoise}.mp3`;
       audio.play();
       trumpsRemaining --;
-      console.log('line 184 - CLICK ON TRUMP', trumpsRemaining);
-      $('.scoreboardFill').width(function(n, currentWidth) {
-        return currentWidth + ($('.scoreboard').width() / levels[currentLevel].numberOfTrumps);
-      });
+      console.log('trumps remaining', trumpsRemaining, 'totalTrumps', totalTrumps);
+      const completionPercentage = (1 - trumpsRemaining / totalTrumps) * 100;
+      $('.scoreboardFill').css('width', `${completionPercentage}%`);
     }
   }
 
@@ -218,7 +222,7 @@ $(document).ready(() => {
       $(event.target).hide(400);
       addTrumps(3);
       trumpsRemaining += 3;
-      console.log('line 220', trumpsRemaining);
+      totalTrumps += 3;
       putinAudio.play();
     }
 
@@ -227,9 +231,7 @@ $(document).ready(() => {
   //------------ LEVEL UP ------------------ //
 
   trumps.on('click', '.trump', function() {
-    console.log('line 229', trumpsRemaining);
     if(trumpsRemaining === 0){
-      console.log('line 231', trumpsRemaining);
       clearInterval(countdown);
       $congrats.show(10);
       $congrats.delay(1000);
