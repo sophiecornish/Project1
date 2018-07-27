@@ -92,7 +92,6 @@ $(document).ready(() => {
     gameOn = true;
     $scoreboardFill.width(0);
     trumpsRemaining = levels[currentLevel].numberOfTrumps;
-    // totalTrumps = levels[currentLevel].numberOfTrumps;
     console.log('--->', trumpsRemaining);
     addTrumps(levels[currentLevel].numberOfTrumps);
     countDownValue = initialTimer;
